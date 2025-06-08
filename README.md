@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # yt-dlp-gui - YouTube视频下载工具
 
 ![项目截图](https://via.placeholder.com/800x500?text=yt-dlp-gui+界面截图)
@@ -79,3 +80,4 @@ yt-dlp-gui/
 3. 提交更改(`git commit -am '添加新功能'`)
 4. 推送到分支(`git push origin feature/新功能`)
 5. 创建Pull Request
+
