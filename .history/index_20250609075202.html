@@ -78,7 +78,7 @@
 
     <!-- 路径栏 -->
     <div class="path-bar card">
-      <input type="text" id="pathInput" placeholder="默认当前下载路径" />
+      <input type="text" id="pathInput" placeholder="默认下载路径" />
       <button class="icon-button" id="refreshPathButton" title="重置路径"><i class="fa-solid fa-rotate"></i></button>
       <button id="selectPathButton"><i class="fa-regular fa-folder-open"></i>浏览</button>
       <button id="downloadButton" class="primary"><i class="fa-solid fa-download"></i>下载</button>
@@ -104,18 +104,6 @@
   <div id="settings" class="page">
     <div class="test-content">
       <h2>全局设置</h2>
-     <div class="settings-section">
-        <div class="settings-group">
-          <div class="settings-label">Cookies 文件</div>
-          <div class="settings-desc">用于登录受限视频或会员内容的下载</div>
-          <div class="form-group" style="margin-top:8px;">
-            <input type="file" id="cookiesFileInput" accept=".txt,.cookies,.json" style="color:#fff;">
-            <span id="cookiesFileName" style="color:#aaa;font-size:13px;margin-left:10px;"></span>
-            <span id="cookiesErrorDetail" style="color:#f44336;font-size:12px;margin-left:10px;"></span>
-          </div>
-        </div>
-      </div>
-      <hr>
       <div class="settings-section">
         <div class="settings-group">
           <div class="settings-label">界面语言设置</div>
@@ -135,7 +123,17 @@
         </div>
       </div>
       <hr>
-      
+      <div class="settings-section">
+        <div class="settings-group">
+          <div class="settings-label">Cookies 文件</div>
+          <div class="settings-desc">用于登录受限视频或会员内容的下载</div>
+          <div class="form-group" style="margin-top:8px;">
+            <input type="file" id="cookiesFileInput" accept=".txt,.cookies,.json" style="color:#fff;">
+            <span id="cookiesFileName" style="color:#aaa;font-size:13px;margin-left:10px;"></span>
+            <span id="cookiesErrorDetail" style="color:#f44336;font-size:12px;margin-left:10px;"></span>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 

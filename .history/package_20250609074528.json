@@ -1,5 +1,5 @@
 {
-  "name": "yt-tubesaver",
+  "name": "yt-TubeSaver",
   "version": "1.0.0",
   "description": "YouTube视频下载桌面工具",
   "main": "main.js",
@@ -10,7 +10,7 @@
     "electron": "^29.4.6"
   },
   "build": {
-    "appId": "yt-tubesaver",
+    "appId": "yt-dlp-gui",
     "files": [
       "**/*",
       "yt-dlp.exe",
