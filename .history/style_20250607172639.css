@@ -1,0 +1,211 @@
+/* 新增模块化样式 - 追加到文件末尾 */
+
+:root {
+  --spacing-unit: 8px;
+  --font-base: 16px;
+  --font-scale: 1.125;
+  
+  /* 字体大小 */
+  --text-xs: calc(var(--font-base) / var(--font-scale));
+  --text-sm: var(--font-base);
+  --text-md: calc(var(--font-base) * var(--font-scale));
+  --text-lg: calc(var(--font-base) * var(--font-scale) * var(--font-scale));
+  --text-xl: calc(var(--font-base) * var(--font-scale) * var(--font-scale) * var(--font-scale));
+  
+  /* 间距 */
+  --space-1: var(--spacing-unit);
+  --space-2: calc(var(--spacing-unit) * 2);
+  --space-3: calc(var(--spacing-unit) * 3);
+  --space-4: calc(var(--spacing-unit) * 4);
+  --space-5: calc(var(--spacing-unit) * 5);
+}
+
+/* 应用容器 */
+.app-container {
+  font-family: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 标题栏模块 */
+.app-header {
+  padding: var(--space-3) var(--space-4);
+  background: linear-gradient(135deg, #1a1a1a, #0d0d0d);
+  border-bottom: 1px solid #333;
+  text-align: center;
+}
+
+.app-header__title {
+  font-size: var(--text-xl);
+  font-weight: 700;
+  margin: 0;
+  background: linear-gradient(90deg, #ff4d4d, #f9cb28);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* 导航栏模块 */
+.app-nav {
+  display: flex;
+  background-color: #252525;
+  padding: 0 var(--space-4);
+  border-bottom: 1px solid #333;
+}
+
+.app-nav__item {
+  padding: var(--space-2) var(--space-3);
+  color: #aaa;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  position: relative;
+  font-size: var(--text-sm);
+}
+
+.app-nav__item:hover {
+  color: #fff;
+  background-color: #333;
+}
+
+.app-nav__item--active {
+  color: #fff;
+  background-color: #333;
+}
+
+.app-nav__item--active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, #ff4d4d, #f9cb28);
+}
+
+/* 主内容区模块 */
+.app-main {
+  padding: var(--space-4);
+  flex: 1;
+}
+
+.app-page {
+  display: none;
+}
+
+.app-page--active {
+  display: block;
+}
+
+/* URL输入模块 */
+.url-input-group {
+  display: flex;
+  gap: var(--space-1);
+  margin-bottom: var(--space-3);
+}
+
+.url-input__field {
+  flex: 1;
+  padding: var(--space-2);
+  background-color: #252525;
+  border: 1px solid #444;
+  border-radius: 4px;
+  color: #fff;
+  font-size: var(--text-sm);
+}
+
+.url-input__field:focus {
+  outline: none;
+  border-color: #f9cb28;
+  box-shadow: 0 0 0 2px rgba(249, 203, 40, 0.2);
+}
+
+/* 按钮模块 */
+.app-btn {
+  padding: var(--space-2) var(--space-3);
+  background: linear-gradient(135deg, #333, #222);
+  border: none;
+  border-radius: 4px;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-weight: 500;
+  font-size: var(--text-sm);
+}
+
+.app-btn {
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.app-btn:hover {
+  background: linear-gradient(135deg, #444, #333);
+  transform: translateY(-2px);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.app-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.app-btn--icon {
+  padding: var(--space-2);
+  min-width: 2.8rem;
+}
+
+.app-btn--download {
+  padding: var(--space-1);
+  min-width: 2.5rem;
+}
+
+.app-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* 主内容布局模块 */
+.content-area {
+  display: flex;
+  gap: var(--space-3);
+  margin-bottom: var(--space-3);
+}
+
+.content-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.content-sidebar {
+  width: 300px;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .content-area {
+    flex-direction: column;
+  }
+  
+  .content-sidebar {
+    width: 100%;
+  }
+  
+  .app-header__title {
+    font-size: var(--text-lg);
+  }
+  
+  .app-nav {
+    padding: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .url-input-group {
+    flex-wrap: wrap;
+  }
+  
+  .app-btn, .url-input__field {
+    width: 100%;
+  }
+}

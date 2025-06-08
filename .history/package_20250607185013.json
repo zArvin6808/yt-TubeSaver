@@ -1,0 +1,23 @@
+{
+  "name": "yt-dlp-gui",
+  "version": "1.0.0",
+  "description": "YouTube视频下载桌面工具",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "devDependencies": {
+    "electron": "^29.0.0"
+  },
+  "build": {
+    "appId": "yt-dlp-gui",
+    "files": [
+      "**/*",
+      "yt-dlp.exe",
+      "ffmpeg.exe"
+    ],
+    "win": {
+      "target": "nsis"
+    }
+  }
+}
