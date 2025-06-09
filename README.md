@@ -57,10 +57,32 @@ yt-TubeSaver/
 1.  **下载项目文件**  
 
     确保项目目录中包含 `ffmpeg.exe` 和 `yt-dlp.exe`。
+
+    **下载方式：**
+    
+    1：yt-dlp.exe
+
+        前往 releases 页面下载 Windows 版本：
+
+        https://github.com/yt-dlp/yt-dlp/releases/latest 
+
+        找到类似文件名：yt-dlp.exe
+        右键另存为保存到你的项目根目录（如 D:\youtube）
+
+    1：ffmpeg.exe
+        🔗 官方地址：https://www.gyan.dev/ffmpeg/builds/ 
+
+        这是目前最稳定、更新频繁的 Windows 构建版本。
+
+        下载方式：点击下载完整包（推荐）：
+
+        https://www.gyan.dev/ffmpeg/builds/ffmpeg-release-full.zip 
+
+        解压后，在 bin/ 文件夹里找到 ffmpeg.exe，把它复制到你的项目根目录中即可。
     
 2.  **启动应用**
 
-    *   运行安装包或便携版 exe 文件。
+    *   运行安装包或下载便携版，解压文件。
     
 
 3.  **操作界面**
