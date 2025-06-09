@@ -4,7 +4,7 @@
 
 一个基于Web的YouTube视频下载GUI工具，使用HTML/CSS/JavaScript构建，配合yt-dlp和ffmpeg实现视频下载功能。
 
-![yt-TubeSaver 界面截图](images/001.webp001.webp)
+![yt-TubeSaver 界面截图](images/001.webp)
 
 ## ✨ 功能特性
 
