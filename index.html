@@ -9,24 +9,29 @@
   <link rel="icon" href="ico/favicon.ico" type="image/x-icon" />
 </head>
 <body>
-
-  <!-- 标题栏 -->
-  <div class="title-bar">
-    <h1>yt-TubeSaver (简体中文)</h1>
-    <span>视频下载工具</span>
+  <div class="custom-title-bar">
+    <div class="title-bar-left">
+      <img src="ico/favicon.png" alt="图标" class="title-bar-icon">
+      <span class="title-text">yt-TubeSaver</span>
+    </div>
   </div>
+
+
 
   <!-- 导航栏 -->
   <div class="navbar">
     <a href="#" class="nav-link active" data-page="main">主页面</a>
     <a href="#" class="nav-link" data-page="settings">选项</a>
-    <a href="#" class="nav-link" data-page="advanced">高级</a>    
+    <a href="#" class="nav-link" data-page="advanced">高级</a>
+    <a href="#" class="nav-link" data-page="about" title="关于">
+      <i class="fa-solid fa-circle-info"></i>
+    </a>
   </div>
 
   <!-- 主页面内容 -->
   <div id="main" class="page active">
     <!-- 网址与按钮 占据整行 -->
-    <div class="url-analysis-row card">
+    <div class="url-analysis-row">
       <input type="text" id="urlInput" placeholder="请输入YouTube视频网址..." />
       <button class="icon-button" id="pasteButton" title="粘贴"><i class="fa-regular fa-clipboard"></i></button>
       <button id="analyzeButton" class="primary"><i class="fa-solid fa-magnifying-glass"></i>分析</button>
@@ -139,7 +144,29 @@
       
     </div>
   </div>
-
+  <!-- 关于页面 -->
+  <div id="about" class="page">
+    <div class="about-content">
+      <h2>关于 yt-TubeSaver</h2>
+      <p>这是一个用于下载 YouTube 视频和音频的工具，旨在提供简单、高效的下载体验。</p>
+      <p><strong>版本：</strong>1.0.0</p>
+      <p><strong>开发者：</strong>Arvinz</p>
+      <p><strong>功能特点：</strong></p>
+      <ul>
+        <li>支持视频和音频的多格式下载</li>
+        <li>支持自定义下载路径</li>
+        <li>提供高级设置选项</li>
+      </ul>
+      <p><strong>GitHub 仓库：</strong>
+        <a href="https://github.com/zArvin6808/yt-TubeSaver?tab=readme-ov-file" target="_blank" rel="noopener noreferrer">点击访问</a>
+      </p>
+      <p><strong>网站：</strong>
+        <a href="https://exploretime.top" target="_blank" rel="noopener noreferrer">https://exploretime.top</a>
+      </p>
+      <p>感谢您的使用！如果您有任何问题或建议，请通过 GitHub 提交 issue 或联系我。</p>
+      <p>© 2025.06.9 Arvinz. All rights reserved.</p>
+    </div>
+  </div>
   <script src="js/script.js"></script>
 </body>
 </html>

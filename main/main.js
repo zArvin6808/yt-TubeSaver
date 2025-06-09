@@ -1,12 +1,18 @@
 const { app, BrowserWindow, ipcMain, dialog } = require('electron');
 const path = require('path');
 const { spawn } = require('child_process');
-// 确保在开发模式下可以找到 yt-dlp.exe
+
 function createWindow() {
   const win = new BrowserWindow({
     width: 1300,
     height: 800,
-    icon: path.join(__dirname, '../ico/favicon.ico'), // 添加窗口图标
+    icon: path.join(__dirname, '../ico/logo.ico'), // 添加窗口图标
+    titleBarStyle: 'hidden',
+    titleBarOverlay: {
+      color: '#1a1a1a',         // 标题栏背景色
+      symbolColor: '#fff',   // 按钮颜色
+      height: 30
+    },
     webPreferences: {
       preload: path.join(__dirname, '../preload.js'),
       nodeIntegration: false,
@@ -24,7 +30,11 @@ app.whenReady().then(createWindow);
 
 ipcMain.handle('download-video', async (event, { url, savePath, format, cookiesPath }) => {
   return new Promise((resolve, reject) => {
-    // 若未指定保存路径，默认用当前目录
+    const isPackaged = app.isPackaged;
+    const exeDir = isPackaged
+      ? path.dirname(app.getPath('exe')) // 打包后
+      : path.resolve(__dirname, '../');  // 开发环境，指向项目根目录
+    const ytdlpPath = path.join(exeDir, 'yt-dlp.exe'); // 修改路径
     let outputPath = savePath && savePath.trim() ? savePath.trim() : __dirname;
     if (outputPath.endsWith('\\') || outputPath.endsWith('/')) {
       outputPath = outputPath.slice(0, -1);
@@ -34,9 +44,9 @@ ipcMain.handle('download-video', async (event, { url, savePath, format, cookiesP
     if (cookiesPath) args.push('--cookies', cookiesPath);
     if (format && format !== '请选择') args.push('-f', format);
     args.push(url);
-    const ytdlp = spawn(path.join(__dirname, 'yt-dlp.exe'), args, { windowsHide: true });
+
+    const ytdlp = spawn(ytdlpPath, args, { windowsHide: true }); // 使用动态路径
     ytdlp.stdout.on('data', data => {
-      // 解析进度行，格式如：[download]   5.3% of ...
       const lines = data.toString().split(/\r?\n/);
       lines.forEach(line => {
         const match = line.match(/\[download\]\s+(\d{1,3}\.\d+)%/);
@@ -68,10 +78,14 @@ ipcMain.handle('select-folder', async () => {
 // 验证 cookies 文件可用性
 ipcMain.handle('validate-cookies', async (event, cookiesPath) => {
   return new Promise((resolve) => {
-    // 使用公开视频作为检测目标，避免误判
+    const isPackaged = app.isPackaged;
+    const exeDir = isPackaged
+      ? path.dirname(app.getPath('exe')) // 打包后
+      : path.resolve(__dirname, '../');  // 开发环境，指向项目根目录
+    const ytdlpPath = path.join(exeDir, 'yt-dlp.exe');// 修改路径
     const testUrl = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
     const args = ['--cookies', cookiesPath, '--get-title', testUrl];
-    const ytdlp = spawn(path.join(__dirname, 'yt-dlp.exe'), args, { windowsHide: true });
+    const ytdlp = spawn(ytdlpPath, args, { windowsHide: true }); // 使用动态路径
     let output = '';
     let error = '';
     ytdlp.stdout.on('data', data => { output += data.toString(); });
@@ -92,10 +106,15 @@ ipcMain.handle('validate-cookies', async (event, cookiesPath) => {
 // 分析视频地址，返回所有可用格式
 ipcMain.handle('analyze-url', async (event, { url, cookiesPath }) => {
   return new Promise((resolve, reject) => {
+    const isPackaged = app.isPackaged;
+    const exeDir = isPackaged
+      ? path.dirname(app.getPath('exe')) // 打包后
+      : path.resolve(__dirname, '../');  // 开发环境，指向项目根目录
+    const ytdlpPath = path.join(exeDir, 'yt-dlp.exe');// 修改路径
     if (!url) return reject(new Error('无效的视频地址'));
     const args = ['-J', url];
     if (cookiesPath) args.push('--cookies', cookiesPath);
-    const ytdlp = spawn(path.join(__dirname, 'yt-dlp.exe'), args, { windowsHide: true });
+    const ytdlp = spawn(ytdlpPath, args, { windowsHide: true }); // 使用动态路径
     let output = '';
     let error = '';
     ytdlp.stdout.on('data', data => { output += data.toString(); });
@@ -109,7 +128,6 @@ ipcMain.handle('analyze-url', async (event, { url, cookiesPath }) => {
           reject(new Error('解析视频信息失败'));
         }
       } else {
-        // 详细错误传递到前端
         reject(new Error(error || '分析失败'));
       }
     });

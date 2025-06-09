@@ -4,12 +4,13 @@
   "description": "YouTube视频下载桌面工具",
   "main": "main/main.js",
   "scripts": {
+    "clean": "if exist dist rmdir /s /q dist",
     "start": "electron .",
-    "dist": "electron-builder"
+    "dist": "npm run clean && electron-builder"
   },
   "devDependencies": {
     "electron": "^29.4.6",
-    "electron-builder": "^24.6.0"
+    "electron-builder": "^24.13.3"
   },
   "build": {
     "appId": "yt-tubesaver",
@@ -19,8 +20,14 @@
       "ffmpeg.exe"
     ],
     "win": {
-      "target": "nsis",
-      "icon": "ico/favicon.ico"
+      "target": [
+        {
+          "target": "portable",
+          "arch": ["x64", "ia32", "arm64"]
+        }
+      ],
+      "icon": "ico/logo.ico",
+      "artifactName": "${productName}-${version}-win-${arch}.${ext}"
     }
   }
 }
