@@ -4,8 +4,8 @@ const { spawn } = require('child_process');
 // 确保在开发模式下可以找到 yt-dlp.exe
 function createWindow() {
   const win = new BrowserWindow({
-    width: 1300,
-    height: 800,
+    width: 1100,
+    height: 700,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
       nodeIntegration: false,

@@ -9,7 +9,7 @@
   },
   "devDependencies": {
     "electron": "^29.4.6",
-    "electron-builder": "^24.6.0"
+    "electron-builder": "^24.17.0"
   },
   "build": {
     "appId": "yt-tubesaver",
