@@ -6,6 +6,7 @@ function createWindow() {
   const win = new BrowserWindow({
     width: 1300,
     height: 800,
+    icon: path.join(__dirname, '../ico/favicon.ico'), // 添加窗口图标
     webPreferences: {
       preload: path.join(__dirname, '../preload.js'),
       nodeIntegration: false,
@@ -16,7 +17,7 @@ function createWindow() {
   // 隐藏菜单栏
   win.setMenuBarVisibility(false);
 
-  win.loadFile('index.html');
+  win.loadFile(path.join(__dirname, '../index.html')); // 推荐用绝对路径
 }
 
 app.whenReady().then(createWindow);

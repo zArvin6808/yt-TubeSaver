@@ -20,7 +20,7 @@
     ],
     "win": {
       "target": "nsis",
-      "icon": "ico/logo.ico"
+      "icon": "ico/favicon.ico"
     }
   }
 }
