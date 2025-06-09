@@ -2,7 +2,7 @@
   "name": "yt-tubesaver",
   "version": "1.0.0",
   "description": "YouTube视频下载桌面工具",
-  "main": "main.js",
+  "main": "main/main.js",
   "scripts": {
     "start": "electron .",
     "dist": "electron-builder"
