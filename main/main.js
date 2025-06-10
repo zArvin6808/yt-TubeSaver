@@ -28,14 +28,16 @@ function createWindow() {
 
 app.whenReady().then(createWindow);
 
-ipcMain.handle('download-video', async (event, { url, savePath, format, cookiesPath }) => {
+ipcMain.handle('download-video', async (event, { url, savePath, format, cookiesPath, downloadThumbnail }) => {
   return new Promise((resolve, reject) => {
     const isPackaged = app.isPackaged;
     const exeDir = isPackaged
       ? path.dirname(app.getPath('exe')) // 打包后
       : path.resolve(__dirname, '../');  // 开发环境，指向项目根目录
     const ytdlpPath = path.join(exeDir, 'yt-dlp.exe'); // 修改路径
-    let outputPath = savePath && savePath.trim() ? savePath.trim() : __dirname;
+    // === 兜底：如果savePath为空或全是空格，使用当前工作目录 ===
+    let outputPath = savePath && savePath.trim() ? savePath.trim() : process.cwd();
+
     if (outputPath.endsWith('\\') || outputPath.endsWith('/')) {
       outputPath = outputPath.slice(0, -1);
     }
@@ -43,6 +45,7 @@ ipcMain.handle('download-video', async (event, { url, savePath, format, cookiesP
     const args = ['-o', outTemplate];
     if (cookiesPath) args.push('--cookies', cookiesPath);
     if (format && format !== '请选择') args.push('-f', format);
+    if (downloadThumbnail) args.push('--write-thumbnail'); // 新增，勾选时下载缩略图
     args.push(url);
 
     const ytdlp = spawn(ytdlpPath, args, { windowsHide: true }); // 使用动态路径

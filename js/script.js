@@ -115,6 +115,17 @@ window.addEventListener('unhandledrejection', function(e) {
 // 优化：缓存DOM元素，合并事件绑定，封装loading，缩略图img，toast限制
 
 document.addEventListener('DOMContentLoaded', () => {
+
+    // 获取下载目录（未填写则用当前目录）
+    function getDownloadPath() {
+        let path = pathInput.value.trim();
+        if (!path) {
+            path = (typeof process !== 'undefined' && process.cwd) ? process.cwd() : '';
+            pathInput.value = path;
+        }
+        return path;
+    }
+
     // 缓存常用DOM
     const urlInput = document.getElementById('urlInput');
     const pasteButton = document.getElementById('pasteButton');
@@ -249,7 +260,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 下载按钮
     downloadButton.addEventListener('click', async () => {
-        const path = pathInput.value.trim();
+        const path = getDownloadPath();
         if (!path) {
             showToast('请选择保存路径', 'error');
             return;
@@ -259,7 +270,7 @@ document.addEventListener('DOMContentLoaded', () => {
             await downloadVideo({
                 url: urlInput.value,
                 path: path,
-                downloadThumbnail: downloadThumb.checked
+                downloadThumbnail: downloadThumb && downloadThumb.checked // 传递缩略图勾选状态
             });
             showToast('下载完成', 'success');
         } catch (error) {
@@ -289,80 +300,78 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // 视频下载按钮：只下载当前选中的视频流
-downloadVideoButton.addEventListener('click', async () => {
-    const url = urlInput.value.trim();
-    let savePath = pathInput.value.trim();
-    const videoFormat = videoSelect.value;
-    if (!url) {
-      showToast('请输入视频地址', 'error');
-      return;
-    }
-    if (!videoFormat || videoFormat === '请选择') {
-      showToast('请选择视频格式', 'error');
-      return;
-    }
-    if (!savePath) savePath = '';
-    // 自动生成文件名
-    let fileName = titleInput && titleInput.value ? titleInput.value.replace(/[\\/:*?"<>|]/g, '_') : '下载文件';
-    let ext = 'mp4';
-    if (videoFormat.includes('webm')) ext = 'webm';
-    if (videoFormat.includes('mkv')) ext = 'mkv';
-    const targetFile = savePath.replace(/[\\/]$/, '') + '\\' + fileName + '.' + ext;
+    downloadVideoButton.addEventListener('click', async () => {
+        const url = urlInput.value.trim();
+        let savePath = getDownloadPath();
+        const videoFormat = videoSelect.value;
+        if (!url) {
+            showToast('请输入视频地址', 'error');
+            return;
+        }
+        if (!videoFormat || videoFormat === '请选择') {
+            showToast('请选择视频格式', 'error');
+            return;
+        }
+        // 自动生成文件名
+        let fileName = titleInput && titleInput.value ? titleInput.value.replace(/[\\/:*?"<>|]/g, '_') : '下载文件';
+        let ext = 'mp4';
+        if (videoFormat.includes('webm')) ext = 'webm';
+        if (videoFormat.includes('mkv')) ext = 'mkv';
+        const targetFile = savePath.replace(/[\\/]$/, '') + '\\' + fileName + '.' + ext;
 
-    setButtonLoading(downloadVideoButton, true, '⬇', '下载中...');
-    showProgressBar(0, '准备下载...');
-    try {
-      await window.electron.downloadVideo({
-        url,
-        savePath,
-        format: videoFormat, // 只下载视频流
-        cookiesPath: selectedCookiesPath
-      });
-      showToast('视频流下载完成', 'success');
-    } catch (e) {
-      showToast('视频流下载失败: ' + (e.message || e), 'error');
-    } finally {
-      setButtonLoading(downloadVideoButton, false, '⬇');
-    }
-});
+        setButtonLoading(downloadVideoButton, true, '⬇', '下载中...');
+        showProgressBar(0, '准备下载...');
+        try {
+            await window.electron.downloadVideo({
+                url,
+                savePath,
+                format: videoFormat, // 只下载视频流
+                cookiesPath: selectedCookiesPath
+            });
+            showToast('视频流下载完成', 'success');
+        } catch (e) {
+            showToast('视频流下载失败: ' + (e.message || e), 'error');
+        } finally {
+            setButtonLoading(downloadVideoButton, false, '⬇');
+        }
+    });
 
-// 音频下载按钮：只下载当前选中的音频流
-downloadAudioButton.addEventListener('click', async () => {
-    const url = urlInput.value.trim();
-    let savePath = pathInput.value.trim();
-    const audioFormat = audioSelect.value;
-    if (!url) {
-      showToast('请输入视频地址', 'error');
-      return;
-    }
-    if (!audioFormat || audioFormat === '请选择') {
-      showToast('请选择音频格式', 'error');
-      return;
-    }
-    if (!savePath) savePath = '';
-    // 自动生成文件名
-    let fileName = titleInput && titleInput.value ? titleInput.value.replace(/[\\/:*?"<>|]/g, '_') : '下载文件';
-    let ext = 'mp3';
-    if (audioFormat.includes('m4a')) ext = 'm4a';
-    if (audioFormat.includes('webm')) ext = 'webm';
-    const targetFile = savePath.replace(/[\\/]$/, '') + '\\' + fileName + '.' + ext;
+    // 音频下载按钮：只下载当前选中的音频流
+    downloadAudioButton.addEventListener('click', async () => {
+        const url = urlInput.value.trim();
+        let savePath = getDownloadPath();
+        const audioFormat = audioSelect.value;
+        if (!url) {
+            showToast('请输入视频地址', 'error');
+            return;
+        }
+        if (!audioFormat || audioFormat === '请选择') {
+            showToast('请选择音频格式', 'error');
+            return;
+        }
+        // 自动生成文件名
+        let fileName = titleInput && titleInput.value ? titleInput.value.replace(/[\\/:*?"<>|]/g, '_') : '下载文件';
+        let ext = 'mp3';
+        if (audioFormat.includes('m4a')) ext = 'm4a';
+        if (audioFormat.includes('webm')) ext = 'webm';
+        const targetFile = savePath.replace(/[\\/]$/, '') + '\\' + fileName + '.' + ext;
 
-    setButtonLoading(downloadAudioButton, true, '⬇', '下载中...');
-    showProgressBar(0, '准备下载...');
-    try {
-      await window.electron.downloadVideo({
-        url,
-        savePath,
-        format: audioFormat, // 只下载音频流
-        cookiesPath: selectedCookiesPath
-      });
-      showToast('音频流下载完成', 'success');
-    } catch (e) {
-      showToast('音频流下载失败: ' + (e.message || e), 'error');
-    } finally {
-      setButtonLoading(downloadAudioButton, false, '⬇');
-    }
-});
+        setButtonLoading(downloadAudioButton, true, '⬇', '下载中...');
+        showProgressBar(0, '准备下载...');
+        try {
+            await window.electron.downloadVideo({
+                url,
+                savePath,
+                format: audioFormat, // 只下载音频流
+                cookiesPath: selectedCookiesPath
+            });
+            showToast('音频流下载完成', 'success');
+        } catch (e) {
+            showToast('音频流下载失败: ' + (e.message || e), 'error');
+        } finally {
+            setButtonLoading(downloadAudioButton, false, '⬇');
+        }
+    });
 
     // ========== Electron集成功能 ========== 
     let selectedCookiesPath = '';
