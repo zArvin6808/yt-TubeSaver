@@ -28,7 +28,7 @@
 
 yt-TubeSaver/
 
-├── .history/ # IDE 自动生成的历史版本文件（建议 Git 管理替代）
+├── .history/ # IDE 自动生成的历史版本文件
 
 │ ├── css/
 
@@ -56,13 +56,13 @@ yt-TubeSaver/
 
 ├── images/
 
-│ └── 001.webp # 示例图片资源（建议更明确命名）
+│ └── 001.webp # 示例图片资源
 
 │
 
 ├── js/
 
-│ └── script.js # 前端逻辑脚本（建议按模块拆分）
+│ └── script.js # 前端逻辑脚本
 
 │
 
@@ -72,29 +72,28 @@ yt-TubeSaver/
 
 │
 
-├── node\_modules/ # Node.js 模块依赖（Git 忽略）
+├── node\_modules/ # Node.js 模块依赖
 
 │
 
 ├── .gitignore # Git 忽略规则配置文件
 
-├── .gitattributes # Git 属性配置（用于行尾处理等）
+├── .gitattributes # Git 属性配置
 
-├── bfg.jar # Git 仓库清理工具（BFG Repo-Cleaner）
+├── bfg.jar # Git 仓库清理工具
 
-├── ffmpeg.exe # 音视频处理工具（跨平台可用）
+├── ffmpeg.exe # 音视频处理工具
 
 ├── index.html # 主页面 HTML 入口文件
 
-├── package-lock.json # npm 依赖锁文件（应提交到 Git）
+├── package-lock.json # npm 依赖锁文件
 
 ├── package.json # 项目元信息和依赖声明
 
-├── preload.js # Electron 预加载脚本（主渲染通信）
+├── preload.js # Electron 预加载脚本
 
-├── README.md # 项目说明文档（欢迎页、使用指南）
-
-└── yt-dlp.exe # YouTube 下载核心工具（Python 编译为 exe）
+├── README.md # 项目说明文档
+└── yt-dlp.exe # YouTube 下载核心工具
 
 * * *
 
