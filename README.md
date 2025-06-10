@@ -20,33 +20,40 @@
 
 
 yt-TubeSaver/
-
-├── .history/              # IDE自动生成的文件历史版本
-│   ├── 多版本备份文件      # 包含.html/.gitignore等文件的历史版本
-│   └── css/历史版本
-├── css/                 # 样式文件
-│   └── style.css        # 主样式表
-├── ico/                 # 图标文件
-│   └── favicon.ico
-│   └── favicon.png
-│   └── logo.ico
-├── images/              # 图片资源
-│   └── 001.webp         # 示例图片
+├── .history/               # IDE 自动保存的历史版本文件（建议 Git 管理替代）
+│   ├── 多版本备份文件       # 示例：.html/.gitignore 文件历史
+│   └── css/
+│       └── style.css.bak    # 风格建议统一命名如 style.css~ 或 version_xxx.css
+│
+├── css/
+│   └── style.css            # 主样式表
+│
+├── ico/
+│   ├── favicon.ico          # 网站图标
+│   ├── favicon.png          # PNG 格式网站图标
+│   └── logo.ico             # 应用程序 Logo 图标
+│
+├── images/
+│   └── 001.webp             # 示例图片资源（可考虑更明确命名）
+│
 ├── js/
-│   └── script.js        # 前端主逻辑
+│   └── script.js            # 前端逻辑脚本（建议按模块拆分或命名更清晰）
+│
 ├── main/
-│   └── main.js          # 主进程入口文件
-├── node\_modules/        # Node.js依赖模块
-├── .gitignore           # Git 忽略文件
-├── .gitattributes       # Git 可选的配置文件
-├── bfg.jar              # Git仓库清理工具
-├── ffmpeg.exe           # 视频处理工具
-├── index.html           # 主界面文件
-├── package-lock.json    # 依赖锁文件
-├── package.json         # 项目配置
-├── preload.js           # 安全通信脚本
-├── README.md            # 说明文档
-└── yt-dlp.exe           # YouTube下载核心工具
+│   └── main.js              # Electron 主进程入口文件
+│
+├── node_modules/            # Node.js 模块依赖（Git 忽略）
+│
+├── .gitignore               # Git 忽略规则配置文件
+├── .gitattributes           # Git 可选属性配置（用于行尾处理等）
+├── bfg.jar                  # Git 仓库清理工具（BFG Repo-Cleaner）
+├── ffmpeg.exe               # 音视频处理工具（跨平台可用）
+├── index.html               # 主页面 HTML 入口文件
+├── package-lock.json        # npm 依赖锁文件（应提交到 Git）
+├── package.json             # 项目元信息和依赖声明
+├── preload.js               # Electron 预加载脚本（用于主渲染进程安全通信）
+├── README.md                # 项目说明文档（欢迎页、使用指南）
+└── yt-dlp.exe               # YouTube 下载核心工具（Python 脚本编译为 exe）
 
 
 
