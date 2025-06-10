@@ -20,32 +20,33 @@
 
 
 yt-TubeSaver/
-├── .history/              # IDE自动生成的文件历史版本
-│   ├── 多版本备份文件      # 包含.html/.gitignore等文件的历史版本
-│   └── css/历史版本
-├── css/                 # 样式文件
-│   └── style.css        # 主样式表
-├── ico/                 # 图标文件
-│   └── favicon.ico
-│   └── favicon.png
-│   └── logo.ico
-├── images/              # 图片资源
-│   └── 001.webp         # 示例图片
+
+├── .history/              # IDE自动生成的文件历史版本
+│   ├── 多版本备份文件      # 包含.html/.gitignore等文件的历史版本
+│   └── css/历史版本
+├── css/                 # 样式文件
+│   └── style.css        # 主样式表
+├── ico/                 # 图标文件
+│   └── favicon.ico
+│   └── favicon.png
+│   └── logo.ico
+├── images/              # 图片资源
+│   └── 001.webp         # 示例图片
 ├── js/
-│   └── script.js        # 前端主逻辑
+│   └── script.js        # 前端主逻辑
 ├── main/
-│   └── main.js          # 主进程入口文件
-├── node_modules/        # Node.js依赖模块
-├── .gitignore           # Git 忽略文件
-├── .gitattributes       # Git 可选的配置文件
-├── bfg.jar              # Git仓库清理工具
-├── ffmpeg.exe           # 视频处理工具
-├── index.html           # 主界面文件
-├── package-lock.json    # 依赖锁文件
-├── package.json         # 项目配置
-├── preload.js           # 安全通信脚本
-├── README.md            # 说明文档
-└── yt-dlp.exe           # YouTube下载核心工具
+│   └── main.js          # 主进程入口文件
+├── node\_modules/        # Node.js依赖模块
+├── .gitignore           # Git 忽略文件
+├── .gitattributes       # Git 可选的配置文件
+├── bfg.jar              # Git仓库清理工具
+├── ffmpeg.exe           # 视频处理工具
+├── index.html           # 主界面文件
+├── package-lock.json    # 依赖锁文件
+├── package.json         # 项目配置
+├── preload.js           # 安全通信脚本
+├── README.md            # 说明文档
+└── yt-dlp.exe           # YouTube下载核心工具
 
 
 
